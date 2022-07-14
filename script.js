@@ -153,6 +153,16 @@ function setClipboard() {
   });
 }
 
+/* Open */
+function openOverlay() {
+  document.getElementById("letitburn").style.height = "100%";
+}
+
+/* Close */
+function closeOverlay() {
+  document.getElementById("letitburn").style.height = "0%";
+} 
+
 
 
 // it's the end of the code as we know it

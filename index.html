@@ -98,26 +98,35 @@
 			<button class="btn selected" onclick="updateBizRegularity(0)">Never</button>
 			<button class="btn" onclick="updateBizRegularity(0.4)">Sometimes</button>
 			<button class="btn" onclick="updateBizRegularity(0.8)">Mostly</button>
+			<p class="merz" onclick="openOverlay()">Business? I have my own jet!<p>
 		</div>
 		
-<!--
-		<form action="#" class="classform hidden">
-			<label for="business">How often did you fly business class?</label><br>
-			<select name="businessRegularity" id="businessRegularity" multiple="" tabindex="-1">
-			  <option value="0" selected>Never</option>
-			  <option value="0.4">Sometimes</option>
-			  <option value="0.8">Mostly</option>
-			</select>
-		</form>
--->
-	  
+		
+		<!-- The overlay -->
+		<div id="letitburn" class="overlay">
+
+		  		
+		  <!-- Overlay content -->
+		  <div class="overlay-content">
+		    <p>
+			    You just like to see the world burn, don't you? 
+			</p>
+			
+			<!-- Button to close the overlay navigation -->
+		  <a href="javascript:void(0)" class="btn" onclick="closeOverlay()">🔥</a>
+
+		  </div>
+		
+		</div>
+		
+		
   </main>
   
   <footer id="footer">
     
     <p><b>How does this work?</b> Based on the number of flights you enter, the application calculates total emissions in CO<sub>2</sub> equivalents, assuming an average of <span class="co2perhourshort"></span>kg of CO<sub>2</sub> equivalents per hour flown. Please be aware that quite a few assumptions and simplifications go into these calculations. My goal is to provide you with an easy way to get a rough estimate of all the carbon emissions your flight activity in the past has caused, and the cost of offsetting these emissions. The resulting numbers will not be correct down to the last digit, but you can expect them to be in the right ballpark. If in doubt, just round up.</p>
     
-    <p>The source code of this application is open so you can see all the assumptions I'm basing my calculations on. If you have ideas on how to improve them while keeping things simple, <a href="mailto:hello@davidbauer.ch ">let me know</a>.</p>
+    <p>The <a href="https://github.com/davidbauer/Flight-Zero/blob/main/script.js">source code of this application</a> is open so you can see all the assumptions I'm basing my calculations on. If you have ideas on how to improve them while keeping things simple, <a href="mailto:hello@davidbauer.ch ">let me know</a>.</p>
       
     <p>If you have the time, and remember all flights you've taken in the past, you can use a service like <a href="https://co2.myclimate.org/en/flight_calculators/new">MyClimate</a> or <a href="https://www.atmosfair.de/en/offset/flight/">Atmosfair</a> to calculate emissions more precisely.</p>
 	
