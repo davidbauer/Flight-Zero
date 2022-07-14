@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Flight Zero</title>
+  
+  <meta name="description" content="">
+  
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="script.js"></script>
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script>
+  	var offsetsDB = new Firebase('{{URL_OF_YOUR_DATABASE}}');
+  </script>
+  <script defer data-domain="labs.davidbauer.ch" src="https://plausible.io/js/plausible.js"></script>
+
+
+  <!-- Facebook -->
+	<meta property="og:image" content="https://labs.davidbauer.ch/flight-zero/img/flight-zero-social.png"/>
+	<meta property="og:image:width" content="800px"/>
+	<meta property="og:image:height" content="450px"/>
+	<meta property="og:type" content="website"/> 
+	<meta property="og:title" content="Flight Zero 🛬">
+	<meta property="og:description" content="How many flights have you taken in your lifetime, and how many emissions have they caused? Find out and learn what you can do about it.">
+	<meta property="og:url" content="https://labs.davidbauer.ch/flight-zero/" />
+	<meta property="og:site_name" content="David Bauer. Journalist."/>
+	<meta property="article:author" content="https://www.facebook.com/davidbauer" />
+	<meta property="fb:app_id" content="320131728095347" />
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:creator" content="@davidbauer">
+	<meta name="twitter:url" content="https://labs.davidbauer.ch/flight-zero/">
+	<meta name="twitter:title" content="Flight Zero 🛬">
+	<meta name="twitter:description" content="How many flights have you taken in your lifetime, and how many emissions have they caused? Find out and learn what you can do about it.">
+	<meta name="twitter:image:src" content="https://labs.davidbauer.ch/flight-zero/img/flight-zero-social.png">
+	<meta property="twitter:domain" content="davidbauer.ch" />
+	<link rel="me" href="https://twitter.com/davidbauer">
+	<meta name="twitter:dnt" content="on">
+	<meta name="twitter:widgets:csp" content="on">
+
+  
+</head>
+
+
+  <body>
+
+  <header id="header">
+	  
+
+	  <h1><span class="flip fadeout"><span class="mobile-hide">💨💨💨</span>💨💨💨💨</span>🛬</h1>
+	  
+	  <p id="intro">You care about the future of our planet. In the past, like many others, you've flown more than you feel comfortable with now. Well, you can't undo the emissions you've caused. What you can do is commit to do better, and offset past emissions. Here's how.</p>
+	     	  
+  </header>
+
+  <main id="content">
+		
+		<p>How many flights in your life so far?</p>
+		<p class="hint">It's okay to guesstimate.</p>
+	    
+	    <form action="#" id="flightsform">
+
+		  
+		  <div class="formitem">
+		  <input type="number" id="shortFlights" name="shortFlights" placeholder="0"><br>
+		  <label for="shortFlights">Short<br><span>Up to 1.5h</span></label><br>
+			  </div>
+			  <div class="formitem">
+		  <input type="number" id="mediumFlights" name="mediumFlights" placeholder="0"><br>
+		  <label for="mediumFlights">Midrange<br><span>1.5—4h</span></label><br>
+			  </div>
+		  <div class="formitem">
+		  <input type="number" id="longFlights" name="longFlights" placeholder="0"><br>
+		  <label for="longFlights">Long<br><span>More than 4h</span></label><br>
+		  </div>
+		</form>
+	 
+	  
+		<div id="toCompensate" class="hidden">
+			<p class="offsetresult">In total, your flights have caused about <span class="totalToCompensate">___</span> tons of carbon emissions<a class="ast" href="#footer">*</a>. Offsetting them will cost around $<span class="totalCost">___</span>.</p>
+			<ul class="offsetinstructions hidden">
+				<li>Open <a target="_blank" href="https://www.atmosfair.de/en/offset/fix/">Atmosfair</a> (or <a href="https://marketplace.goldstandard.org/collections/projects#collection-template" target="_blank">pick a specific project here</a>)</li>
+				<li>Enter that you'd like to offset <span class="totalToCompensateKg">___</span>kg / <span class="totalToCompensate">___</span> tons of CO<sub>2</sub>.</li>
+				<li>Pay</li>
+				<li>Share and encourage others to follow your example<br>👉<a class="copythis" onclick="setClipboard()">Copy message to clipboard</a></li>
+			</ul>
+			<button class="offsetbutton btn" onclick="offsetnow()">Offset now</button>
+		</div>
+		
+		<div id="businessRegularity" class="hidden">
+			<p class="small">How often did you fly business class?</p>
+			<button class="btn selected" onclick="updateBizRegularity(0)">Never</button>
+			<button class="btn" onclick="updateBizRegularity(0.4)">Sometimes</button>
+			<button class="btn" onclick="updateBizRegularity(0.8)">Mostly</button>
+		</div>
+		
+<!--
+		<form action="#" class="classform hidden">
+			<label for="business">How often did you fly business class?</label><br>
+			<select name="businessRegularity" id="businessRegularity" multiple="" tabindex="-1">
+			  <option value="0" selected>Never</option>
+			  <option value="0.4">Sometimes</option>
+			  <option value="0.8">Mostly</option>
+			</select>
+		</form>
+-->
+	  
+  </main>
+  
+  <footer id="footer">
+    
+    <p><b>How does this work?</b> Based on the number of flights you enter, the application calculates total emissions in CO<sub>2</sub> equivalents, assuming an average of <span class="co2perhourshort"></span>kg of CO<sub>2</sub> equivalents per hour flown. Please be aware that quite a few assumptions and simplifications go into these calculations. My goal is to provide you with an easy way to get a rough estimate of all the carbon emissions your flight activity in the past has caused, and the cost of offsetting these emissions. The resulting numbers will not be correct down to the last digit, but you can expect them to be in the right ballpark. If in doubt, just round up.</p>
+    
+    <p>The source code of this application is open so you can see all the assumptions I'm basing my calculations on. If you have ideas on how to improve them while keeping things simple, <a href="mailto:hello@davidbauer.ch ">let me know</a>.</p>
+      
+    <p>If you have the time, and remember all flights you've taken in the past, you can use a service like <a href="https://co2.myclimate.org/en/flight_calculators/new">MyClimate</a> or <a href="https://www.atmosfair.de/en/offset/flight/">Atmosfair</a> to calculate emissions more precisely.</p>
+	
+	<p><b>Why offset?</b> Flying is one of the main ways in which individuals contribute to the climate crisis. While it's best to reduce emissions in the first place, offsetting provides a way to compensate emissions that have already occurred, either by investing in technology that removes carbon from the air, or by investing in projects that reduce emissions elsewhere.</p> 
+			
+	<p><b>Wait, but isn't carbon offsetting bad?</b> That depends on you. It's bad if you just use it to feel better while you continue causing too many emissions. However, it's a good way to deal with emissions you've already caused and can't undo. It's good if it is one of many actions you take and part of a commitment to being more considerate going forward.</p>
+	
+	<p><b>Wait, but is it effective?</b> According to <a href="https://www.givinggreen.earth/recommendations">Giving Green</a>, a non-profit that researches the most effective ways to donate to fight the climate crisis, carbon offsets and removals are second only to efforts to influence policy change. So you could also donate the amount calculated above ($<span class="totalCost">___</span>) to organisations that fight for climate policy change.</p>
+		
+	<p><b>But will my tiny contribution make a difference?</b> I like to look at it this way: Everything you do, tiny as it might be, can inspire others to follow suit. Over time, these effects compound. At the same time, you're perfectly right: Real change happens when informed consumers and citizens demand action from corporations and elected officials. Solving the climate crisis isn't either/or. Let's do all we can.</p>
+	
+	<p>🌍🔥🧯</p>
+	
+	<p>Made by <a href="https://www.davidbauer.ch">David Bauer</a>.<br>If you liked this, <a href="https://www.weeklyfilet.com/?ref=flightzero">sign up to my newsletter</a> and have a look at <a href="https://www.davidbauer.ch/#portfolio">other things I made</a>.</p>
+	
+  </footer>
+
+  </body>
+
+</html>
